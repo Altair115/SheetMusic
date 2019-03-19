@@ -1,42 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SheetMusic", "SheetMusic\", "{63270A5F-BDD3-4E75-B08B-C653C0A03317}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_60236"
-		Debug.AspNetCompiler.PhysicalPath = "SheetMusic\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60236\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_60236"
-		Release.AspNetCompiler.PhysicalPath = "SheetMusic\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60236\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "60236"
-		SlnRelativePath = "SheetMusic\"
-		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetMusic", "SheetMusic\SheetMusic.csproj", "{EDC0A9B9-26A8-46EC-9D2E-DB40179069B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{63270A5F-BDD3-4E75-B08B-C653C0A03317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63270A5F-BDD3-4E75-B08B-C653C0A03317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC0A9B9-26A8-46EC-9D2E-DB40179069B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDC0A9B9-26A8-46EC-9D2E-DB40179069B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC0A9B9-26A8-46EC-9D2E-DB40179069B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDC0A9B9-26A8-46EC-9D2E-DB40179069B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {261F41BB-6FE4-4125-83AC-83629D817599}
+		SolutionGuid = {508078C3-CBAA-413E-BE44-70299F13F124}
 	EndGlobalSection
 EndGlobal
