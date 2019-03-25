@@ -25,6 +25,8 @@ namespace SheetMusic.Models
         {
         }
 
+        public DbSet<Piece> Pieces { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
