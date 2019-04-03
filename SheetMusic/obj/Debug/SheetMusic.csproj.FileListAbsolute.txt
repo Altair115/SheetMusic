@@ -109,3 +109,4 @@ D:\GitHub\SheetMusic\SheetMusic\obj\Debug\SheetMusic.dll
 D:\GitHub\SheetMusic\SheetMusic\obj\Debug\SheetMusic.pdb
 D:\GitHub\SheetMusic\SheetMusic\obj\Debug\SheetMusic.Migrations.Piece1.resources
 D:\GitHub\SheetMusic\SheetMusic\obj\Debug\SheetMusic.csproj.GenerateResource.cache
+D:\GitHub\SheetMusic\SheetMusic\obj\Debug\SheetMusic.Migrations.sheetz0.resources

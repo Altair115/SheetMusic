@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.PieceName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PieceSubName)
+            @Html.DisplayNameFor(model => model.Artist)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Genre)
@@ -26,9 +26,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Difficulty)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
         <th></th>
     </tr>
 
@@ -36,9 +33,10 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.PieceName)
+            <p>@Html.DisplayFor(modelItem => item.PieceSubName)</p>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PieceSubName)
+            @Html.DisplayFor(modelItem => item.Artist)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Genre)
@@ -48,9 +46,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Difficulty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SheetMusic.Models;
-using Microsoft.AspNet.Identity;
 
 namespace SheetMusic.Controllers
 {
@@ -18,9 +17,7 @@ namespace SheetMusic.Controllers
         // GET: Pieces
         public ActionResult Index()
         {
-            string currentUserId = User.Identity.GetUserId();
-            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
-            return View(db.Pieces.ToList().Where(x => x.User == currentUser));
+            return View(db.Pieces.ToList());
         }
 
         // GET: Pieces/Details/5
@@ -49,7 +46,7 @@ namespace SheetMusic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PieceName,PieceSubName,Genre,Year,Difficulty,Description")] Piece piece)
+        public ActionResult Create([Bind(Include = "Id,PieceName,PieceSubName,Artist,Genre,Year,Difficulty,Description")] Piece piece)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +78,7 @@ namespace SheetMusic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PieceName,PieceSubName,Genre,Year,Difficulty,Description")] Piece piece)
+        public ActionResult Edit([Bind(Include = "Id,PieceName,PieceSubName,Artist,Genre,Year,Difficulty,Description")] Piece piece)
         {
             if (ModelState.IsValid)
             {

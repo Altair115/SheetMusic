@@ -10,6 +10,7 @@ namespace SheetMusic.Models
         public int Id { get; set; }
         public string PieceName { get; set; }
         public string PieceSubName { get; set; }
+        public string Artist { get; set; }
         public string Genre { get; set; }
         public int Year { get; set; }
         public string Difficulty { get; set; }
