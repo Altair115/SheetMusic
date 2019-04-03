@@ -14,6 +14,8 @@ namespace SheetMusic.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+
         // GET: Pieces
         public ActionResult Index()
         {
@@ -38,7 +40,8 @@ namespace SheetMusic.Controllers
         // GET: Pieces/Create
         public ActionResult Create()
         {
-            return View();
+            Piece _piece = new Piece();
+            return View(_piece);
         }
 
         // POST: Pieces/Create
