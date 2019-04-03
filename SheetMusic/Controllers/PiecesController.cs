@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SheetMusic.Models;
+using Microsoft.AspNet.Identity;
 
 namespace SheetMusic.Controllers
 {
@@ -19,7 +20,9 @@ namespace SheetMusic.Controllers
         // GET: Pieces
         public ActionResult Index()
         {
-            return View(db.Pieces.ToList());
+            string currentUserId = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+            return View(db.Pieces.ToList().Where(x => x.User == currentUser));
         }
 
         // GET: Pieces/Details/5
@@ -53,6 +56,9 @@ namespace SheetMusic.Controllers
         {
             if (ModelState.IsValid)
             {
+                string currentUserId = User.Identity.GetUserId();
+                ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+                piece.User = currentUser;
                 db.Pieces.Add(piece);
                 db.SaveChanges();
                 return RedirectToAction("Index");
