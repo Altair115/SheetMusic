@@ -3,15 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SheetMusic.Models;
 
 namespace SheetMusic.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        //[HttpPost]
+        public ActionResult Index(string searchParams)
         {
-            return View();
+            var music = from m in db.Pieces select m;
+
+            if (!String.IsNullOrEmpty(searchParams))
+            {
+                music = music.Where(m => m.PieceName.Contains(searchParams));
+            }
+
+            return View(music.ToList());
         }
+
 
         public ActionResult About()
         {
