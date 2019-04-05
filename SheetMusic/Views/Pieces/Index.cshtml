@@ -1,24 +1,28 @@
 ﻿@model IEnumerable<SheetMusic.Models.Piece>
 
+
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@Html.ActionLink("Zoek op naam.", "Index")<br>
+@Html.ActionLink("Zoek op Genre.", "Index", new { sortOrder = ViewBag.GenreSearchParm })<br>
+@Html.ActionLink("Zoek op moeilijkheidsgraad.", "Index", new { sortOrder = ViewBag.DifficultySearchParm })
 
 @using (Html.BeginForm())
 {
     <p>
-        Find Music pieces: @Html.TextBox("searchParams")
+        Search: @Html.TextBox("searchParams")
         <input type="submit" value="Search" />
     </p>
 }
 
-<table class="table">
+<table class="table" id="tblPopulation">
+    <!--name, artist, genre, year, difficulty-->
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PieceName)
@@ -37,32 +41,34 @@
         </th>
         <th></th>
     </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PieceName)
+                    <p>@Html.DisplayFor(modelItem => item.PieceSubName)</p>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Artist)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Difficulty)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PieceName)
-                <p>@Html.DisplayFor(modelItem => item.PieceSubName)</p>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Artist)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Difficulty)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
+
 
 </table>
+
