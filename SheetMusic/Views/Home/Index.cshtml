@@ -1,12 +1,54 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@using SheetMusic.Models
+@model IEnumerable<SheetMusic.Models.Piece>
 
 <div class="jumbotron">
     <h1>Sheetz</h1>
     <p class="lead">
-        Sheetz is an atlas apllication to point you in the direction where your sheetmusic is stored.
-        its currently in Dev so some features may or may not work.
+        Sheetz is an atlas application to point you in the direction where your sheet music is stored.
+        It's currently in a developer stage. This may result in some features not working.
     </p>
     <p><a href="https://github.com/Altair115/SheetMusic" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    @using (Html.BeginForm())
+    {
+        <p>
+            Find by name: @Html.TextBox("searchParams")
+            <input type="submit" value="Search" />
+        </p>
+    }
 </div>
+
+<table class="table table-dark table-active table-bordered table-striped table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PieceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PieceSubName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PieceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PieceSubName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Pieces", new{id = item.Id}, null)
+            </td>
+        </tr>
+    }
+</table>

@@ -22,7 +22,7 @@ namespace SheetMusic.Controllers
         {
             string currentUserId = User.Identity.GetUserId();
             ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
-            return View(db.Pieces.ToList().Where(x => x.User == currentUser));
+            return View(db.Pieces.Where(x => x.User == currentUser).ToList());
         }
 
         // GET: Pieces/Details/5
