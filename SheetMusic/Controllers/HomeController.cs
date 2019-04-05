@@ -12,16 +12,9 @@ namespace SheetMusic.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         //[HttpPost]
-        public ActionResult Index(string searchParams)
+        public ActionResult Index()
         {
-            var music = from m in db.Pieces select m;
-
-            if (!String.IsNullOrEmpty(searchParams))
-            {
-                music = music.Where(m => m.PieceName.Contains(searchParams));
-            }
-
-            return View(music.ToList());
+            return View();
         }
 
 

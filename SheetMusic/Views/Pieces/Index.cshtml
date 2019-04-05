@@ -9,7 +9,16 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find Music pieces: @Html.TextBox("searchParams")
+        <input type="submit" value="Search"/>
+    </p>
+}
+
+<table class="table table-dark table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PieceName)
