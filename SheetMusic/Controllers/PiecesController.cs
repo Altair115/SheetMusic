@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using SheetMusic.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.Provider;
 
 namespace SheetMusic.Controllers
 {
@@ -18,10 +19,20 @@ namespace SheetMusic.Controllers
 
 
         // GET: Pieces
-        public ActionResult Index()
+        public ActionResult Index(string searchParams)
         {
             string currentUserId = User.Identity.GetUserId();
             ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+
+            if (!String.IsNullOrEmpty(searchParams))
+            {
+                //patch out error code.
+                var urg = db.Pieces.ToList().Where(x => x.User == currentUser);
+                urg = urg.Where(m => m.PieceName.Contains(searchParams));
+
+                return View(urg.ToList());
+            }
+            //Returns if searchparams are empty
             return View(db.Pieces.ToList().Where(x => x.User == currentUser));
         }
 
