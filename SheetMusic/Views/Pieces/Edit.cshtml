@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Piece</h4>
         <hr />
@@ -84,6 +84,11 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@if (!Request.IsAuthenticated)
+{
+    Response.Redirect(Url.Action("Login", "Account"));
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

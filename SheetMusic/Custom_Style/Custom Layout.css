@@ -1,0 +1,9 @@
+﻿/* Cover Image Front Page */
+.mainPage-image {
+    background-image: url("../Content/Images/LoginBG.png");
+    background-color: #cccccc;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

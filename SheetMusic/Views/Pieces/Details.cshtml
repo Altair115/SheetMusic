@@ -72,3 +72,8 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@if (!Request.IsAuthenticated)
+{
+    Response.Redirect(Url.Action("Login", "Account"));
+}

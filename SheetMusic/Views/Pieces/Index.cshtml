@@ -7,11 +7,26 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add New Piece", "Create", null, new { @class = "btn btn-primary" })
 </p>
-@Html.ActionLink("Zoek op naam.", "Index")<br>
-@Html.ActionLink("Zoek op Genre.", "Index", new { sortOrder = ViewBag.GenreSearchParm })<br>
-@Html.ActionLink("Zoek op moeilijkheidsgraad.", "Index", new { sortOrder = ViewBag.DifficultySearchParm })
+
+<div>
+    <row>
+        @Html.ActionLink("Search on Name.", "Index", null, new { @class = "btn btn-primary" })
+    </row>
+    <row>
+        @Html.ActionLink("Search on Genre", "Index", new { sortOrder = ViewBag.GenreSearchParm }, new { @class = "btn btn-primary" })
+    </row>
+    <row>
+        @Html.ActionLink("Search on Difficulty", "Index", new { sortOrder = ViewBag.DifficultySearchParm }, new { @class = "btn btn-primary" })
+    </row>
+    <row>
+        @Html.ActionLink("Search on Year", "Index", new { sortOrder = ViewBag.YearSearchParm }, new { @class = "btn btn-primary" })
+    </row>
+</div>
+
+<br />
+
 
 @using (Html.BeginForm())
 {
@@ -41,34 +56,36 @@
         </th>
         <th></th>
     </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PieceName)
-                    <p>@Html.DisplayFor(modelItem => item.PieceSubName)</p>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Artist)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Year)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Difficulty)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
-
-
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PieceName)
+                <p>@Html.DisplayFor(modelItem => item.PieceSubName)</p>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Difficulty)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 </table>
+
+@if (!Request.IsAuthenticated)
+    {
+        Response.Redirect(Url.Action("Login", "Account"));
+    }
 

@@ -2,12 +2,21 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Sheetz</h1>
-    <p class="lead">
-        Sheetz is an atlas apllication to point you in the direction where your sheetmusic is stored.
-        its currently in Dev so some features may or may not work.
-    </p>
-    <p><a href="https://github.com/Altair115/SheetMusic" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    @Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-primary btn-lg" })
-</div>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Custom_Style/Custom Layout.css">
+</head>
+<body class="mainPage-image">
+    <div class="jumbotron">
+        <h1>Sheetz</h1>
+        <p class="lead">
+            Sheetz is an atlas apllication to point you in the direction where your sheetmusic is stored.
+            its currently in Dev so some features may or may not work.
+        </p>
+        <p><a href="https://github.com/Altair115/SheetMusic" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        @Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-primary btn-lg" })
+    </div>
+</body>
+
+<footer class="">
+
+</footer>

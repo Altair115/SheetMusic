@@ -7,36 +7,36 @@
     //Items for dropdown list
     //Razor pages is truly something else...
     var ListItems = new List<ListItem>
-    {
-        new ListItem{Text ="Rock", Value ="Rock"},
-        new ListItem{Text ="Caribbean", Value="Caribbean"},
-        new ListItem{Text="Pop", Value="Pop"},
-        new ListItem{Text="Hip Hop", Value="Hip Hop"},
-        new ListItem{Text="Blues", Value="Blues"},
-        new ListItem{Text="Country", Value="Country"},
-        new ListItem{Text="R&B Soul", Value="R&BSoul"},
-        new ListItem{Text="Jazz", Value="Jazz"},
-        new ListItem{Text="Electronic", Value="Electronic"},
-        new ListItem{Text="Anime", Value="Anime"}
-    };
+{
+new ListItem{Text ="Rock", Value ="Rock"},
+new ListItem{Text ="Caribbean", Value="Caribbean"},
+new ListItem{Text="Pop", Value="Pop"},
+new ListItem{Text="Hip Hop", Value="Hip Hop"},
+new ListItem{Text="Blues", Value="Blues"},
+new ListItem{Text="Country", Value="Country"},
+new ListItem{Text="R&B Soul", Value="R&BSoul"},
+new ListItem{Text="Jazz", Value="Jazz"},
+new ListItem{Text="Electronic", Value="Electronic"},
+new ListItem{Text="Anime", Value="Anime"}
+};
 
     //List for Difficulties
     var difficulties = new List<ListItem>
-    {
-        new ListItem {Text = "Beginner", Value = "Beginner"},
-        new ListItem {Text = "Intermediate", Value = "Intermediate"},
-        new ListItem {Text = "Expert", Value = "Expert"},
-        new ListItem {Text = "Expert Plus", Value = "Expert Plus"}
-    };
+{
+new ListItem {Text = "Beginner", Value = "Beginner"},
+new ListItem {Text = "Intermediate", Value = "Intermediate"},
+new ListItem {Text = "Expert", Value = "Expert"},
+new ListItem {Text = "Expert Plus", Value = "Expert Plus"}
+};
 }
 
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Piece</h4>
         <hr />
@@ -69,8 +69,8 @@
             @Html.LabelFor(model => model.Genre, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(m => m.Genre, new SelectList(ListItems, "Value", "Text"))
-                @Html.ValidationMessageFor(model => model.Genre, "", new {@class = "text-danger"})
-                
+                @Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
@@ -109,6 +109,11 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@if (!Request.IsAuthenticated)
+{
+    Response.Redirect(Url.Action("Login", "Account"));
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

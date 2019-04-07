@@ -69,7 +69,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
@@ -78,3 +79,8 @@
         </div>
     }
 </div>
+
+@if (!Request.IsAuthenticated)
+{
+    Response.Redirect(Url.Action("Login", "Account"));
+}

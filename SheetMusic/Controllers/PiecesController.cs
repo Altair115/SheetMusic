@@ -19,20 +19,39 @@ namespace SheetMusic.Controllers
 
 
         // GET: Pieces
-        public ActionResult Index(string searchParams)
+        public ActionResult Index(string searchParams, string sortOrder)
         {
+            ViewBag.GenreSearchParm = String.IsNullOrEmpty(searchParams) ? "search_Genre" : "";
+            ViewBag.DifficultySearchParm = String.IsNullOrEmpty(searchParams) ? "search_Difficulty" : "";
+            ViewBag.YearSearchParm = String.IsNullOrEmpty(searchParams) ? "search_Year" : "";
+
             string currentUserId = User.Identity.GetUserId();
             ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
 
             if (!String.IsNullOrEmpty(searchParams))
             {
-                //patch out error code.
-                var urg = db.Pieces.ToList().Where(x => x.User == currentUser);
-                urg = urg.Where(m => m.PieceName.Contains(searchParams));
+                var d = db.Pieces.ToList().Where(x => x.User == currentUser);
+                switch (sortOrder)
+                {
+                    //Check URL for search type
+                    case "search_Genre":
+                        d = d.Where(m => m.Genre.ToLower().Contains(searchParams.ToLower()));
+                        break;
 
-                return View(urg.ToList());
+                    case "search_Difficulty":
+                        d = d.Where(m => m.Difficulty.ToLower().Contains(searchParams.ToLower()));
+                        break;
+                    case "search_Year":
+                        d = d.Where(m => m.Year.ToString().ToLower().Contains(searchParams.ToLower()));
+                        break;
+                    //Default to name if none found.
+                    default:
+                        d = d.Where(m => m.PieceName.ToLower().Contains(searchParams.ToLower()));
+                        break;
+                }
+
+                return View(d.ToList());
             }
-            //Returns if searchparams are empty
             return View(db.Pieces.ToList().Where(x => x.User == currentUser));
         }
 
