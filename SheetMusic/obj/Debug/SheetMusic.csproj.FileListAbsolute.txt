@@ -222,3 +222,5 @@ G:\Cloned Shit\KMS\SheetMusic\SheetMusic\obj\Debug\SheetMusic.csproj.CoreCompile
 G:\Cloned Shit\KMS\SheetMusic\SheetMusic\obj\Debug\SheetMusic.csproj.CopyComplete
 G:\Cloned Shit\KMS\SheetMusic\SheetMusic\obj\Debug\SheetMusic.dll
 G:\Cloned Shit\KMS\SheetMusic\SheetMusic\obj\Debug\SheetMusic.pdb
+D:\GitHub\SheetMusic\SheetMusic\bin\WebMatrix.Data.dll
+D:\GitHub\SheetMusic\SheetMusic\bin\WebMatrix.Data.xml
