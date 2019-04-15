@@ -112,7 +112,7 @@ namespace SheetMusic.Controllers
             return View(piece);
         }
 
-        // POST: Pieces/Edit/5
+        // POST: Pieces/Edit/
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -128,7 +128,7 @@ namespace SheetMusic.Controllers
             return View(piece);
         }
 
-        // GET: Pieces/Delete/5
+        // GET: Pieces/Delete/
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -143,7 +143,7 @@ namespace SheetMusic.Controllers
             return View(piece);
         }
 
-        // POST: Pieces/Delete/5
+        // POST: Pieces/Delete/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
