@@ -1,31 +1,69 @@
 ﻿@model IEnumerable<SheetMusic.Models.Piece>
+@using System.EnterpriseServices
+@using System.ServiceModel.Syndication
+@using System.Web.UI.WebControls
 @using WebMatrix.Data;
 @using Microsoft.AspNet.Identity;
+@using SheetMusic.Models
 
 @{
     ViewBag.Title = "Index";
+
 
 
     string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Sheetz.mdf;Integrated Security=True";
     string provider = "System.Data.SqlClient";
     Database db = Database.OpenConnectionString(connectionString, provider);
 
-    var selectCommand = "SELECT * FROM Pieces";
-    var searchTerm = "";
+    //string selectCommand = "SELECT * FROM Pieces";
+    string selectCommand = "SELECT * FROM Pieces WHERE PieceName LIKE ";
+    var searchTerm = "%" + "Kawaki" + "%";
+
+    var cachedShit = "";
+
+    bool isFound = false;
 
     var _key = User.Identity.GetUserId();
 
-    if (!Request.QueryString["searchGenre"].IsEmpty())
+
+
+    if (IsPost)
     {
-        selectCommand = "SELECT * FROM Pieces WHERE Genre = @0";
-        searchTerm = Request.QueryString["searchGenre"];
+    	//Get stuff from forms.
+        cachedShit = Request.QueryString["searchTitle"];
+        searchTerm = "%" + Request.QueryString["searchTitle"] + "%";
+
+        //Grab values of checkboxes
+        var a1 = Request.Form["nameFilter"];
+        var a2 = Request["genreFilter"];
+        var a3 = Request["jaarFilter"];
+        var a4 = Request["moeilijkheidFilter"];
+
+        if (a1 == "on" && isFound == false)
+        {
+            selectCommand = resolver.getQueryString("name");
+            isFound = true;
+
+        }
+        else if (a2 == "on" && isFound == false)
+        {
+            selectCommand = resolver.getQueryString("genre");
+            isFound = true;
+        }
+        else if(a3 == "on" && isFound == false)
+        {
+            selectCommand = resolver.getQueryString("year");
+            isFound = true;
+        }
+        else if(a4 == "on" && isFound == false)
+        {
+            selectCommand = resolver.getQueryString("difficulty");
+        }
+        //searchTerm = Request.QueryString["searchTitle"];
+
     }
 
-    if (!Request.QueryString["searchTitle"].IsEmpty())
-    {
-        selectCommand = "SELECT * FROM Pieces WHERE PieceName LIKE @0";
-        searchTerm = "%" + Request["searchTitle"] + "%";
-    }
+    var endResult = selectCommand + searchTerm;
 
     var PiecesDB = db.Query(selectCommand, searchTerm);
 
@@ -36,102 +74,47 @@
     @Html.ActionLink("Add New Piece", "Create", null, new { @class = "btn btn-primary" })
 </p>
 
-<div>
-    <row>
-        @Html.ActionLink("Search on Name.", "Index", null, new { @class = "btn btn-primary" })
-    </row>
-    <row>
-        @Html.ActionLink("Search on Genre", "Index", new { sortOrder = ViewBag.GenreSearchParm }, new { @class = "btn btn-primary" })
-    </row>
-    <row>
-        @Html.ActionLink("Search on Difficulty", "Index", new { sortOrder = ViewBag.DifficultySearchParm }, new { @class = "btn btn-primary" })
-    </row>
-    <row>
-        @Html.ActionLink("Search on Year", "Index", new { sortOrder = ViewBag.YearSearchParm }, new { @class = "btn btn-primary" })
-    </row>
-</div>
-
 <br />
 
 
 
 
-@*
 
-    @using (Html.BeginForm())
-    {
-        <p>
-            Search: @Html.TextBox("searchParams")
-            <input type="submit" value="Search" />
-        </p>
-    }
+<form method="post">
+    
+    <label for="nameFilter">Zoek op naam</label>
+    <input type="checkbox" name="nameFilter" checked="checked" />
 
-    <table class="table" id="tblPopulation">
-        <!--name, artist, genre, year, difficulty-->
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PieceName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Artist)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Year)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Difficulty)
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PieceName)
-                    <p>@Html.DisplayFor(modelItem => item.PieceSubName)</p>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Artist)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Year)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Difficulty)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
-    </table>
-*@
+    <label for="genreFilter">Zoek op Genre</label>
+    <input type="checkbox" name="genreFilter" />
+    
+    <label for="jaarFilter">Zoek op Jaar</label>
+    <input type="checkbox" name="jaarFilter" />
+    
+    <label for="moeilijkheidFilter">Zoek op moeilijkheid</label>
+    <input type="checkbox" name="moeilijkheidFilter" />
 
-
-
+</form>
 <form method="get">
-    <input type="text" name="searchTitle" placeholder="Search" value="@Request.QueryString["searchTitle"]" />
+    <input type="text" name="searchTitle" placeholder="Search" value="@cachedShit" />
     <input type="submit" value="Search" />
 </form>
+Val1: @Request.Form["nameFilter"]
+Val2: @Request.Form["genreFilter"]
+Val3: @Request.Form["jaarFilter"]
+Val4: @Request.Form["moeilijkheidFilter"] 
 
+<p>@endResult</p>
 <br>
 <div class="menu">
     <table class="table table-hover table-striped">
         <thead class="thead-dark">
             <tr class="row">
-                <th>Gift:</th>
-                <th>Artist:</th>
+                <th>Naam:</th>
+                <th>Componist:</th>
                 <th>Genre:</th>
-                <th>Year:</th>
-                <th>Difficulty:</th>
+                <th>Jaar:</th>
+                <th>Moeilijkheid:</th>
             </tr>
         </thead>
         @foreach (var record in PiecesDB)
@@ -156,4 +139,3 @@
 {
     Response.Redirect(Url.Action("Login", "Account"));
 }
-

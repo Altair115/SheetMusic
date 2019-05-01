@@ -224,3 +224,5 @@ G:\Cloned Shit\KMS\SheetMusic\SheetMusic\obj\Debug\SheetMusic.dll
 G:\Cloned Shit\KMS\SheetMusic\SheetMusic\obj\Debug\SheetMusic.pdb
 D:\GitHub\SheetMusic\SheetMusic\bin\WebMatrix.Data.dll
 D:\GitHub\SheetMusic\SheetMusic\bin\WebMatrix.Data.xml
+G:\Cloned Shit\KMS\SheetMusic\SheetMusic\bin\WebMatrix.Data.dll
+G:\Cloned Shit\KMS\SheetMusic\SheetMusic\bin\WebMatrix.Data.xml
