@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Details - @Html.DisplayFor(model => model.PieceName)</h2>
 
 <div>
-    <h4>Piece</h4>
+    <h4>@Html.DisplayFor(model => model.PieceSubName)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.PieceName)
+            <label class="control-label col-md-2">Title:</label>
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PieceSubName)
+            <label class="control-label col-md-2">Subtitle:</label>
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Artist)
+            <label class="control-label col-md-2">Artist:</label>
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Genre)
+            <label class="control-label col-md-2">Genre:</label>
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Year)
+            <label class="control-label col-md-2">Year:</label>
         </dt>
 
         <dd>
@@ -51,7 +51,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Difficulty)
+            <label class="control-label col-md-2">Difficulty:</label>
         </dt>
 
         <dd>
@@ -59,7 +59,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            <label class="control-label col-md-2">Description:</label>
         </dt>
 
         <dd>
