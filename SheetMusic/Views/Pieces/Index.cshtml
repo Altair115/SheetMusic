@@ -16,8 +16,8 @@
     Database db = Database.OpenConnectionString(connectionString, provider);
 
     //string selectCommand = "SELECT * FROM Pieces";
-    string selectCommand = "SELECT * FROM Pieces WHERE PieceName LIKE ";
-    var searchTerm = "%" + "Kawaki" + "%";
+    string selectCommand = "SELECT * FROM Pieces";
+    var searchTerm = "";
 
     var cachedShit = "";
 
@@ -30,8 +30,8 @@
     if (IsPost)
     {
     	//Get stuff from forms.
-        cachedShit = Request.QueryString["searchTitle"];
-        searchTerm = "%" + Request.QueryString["searchTitle"] + "%";
+        cachedShit = Request["searchTitle"];
+        searchTerm = "%" + Request["searchTitle"] + "%";
 
         //Grab values of checkboxes
         var a1 = Request.Form["nameFilter"];
@@ -77,34 +77,24 @@
 <br />
 
 
-
-
-
 <form method="post">
-    
+
     <label for="nameFilter">Zoek op naam</label>
-    <input type="checkbox" name="nameFilter" checked="checked" />
+    <input type="checkbox" name="nameFilter" checked="checked" /><br>
 
     <label for="genreFilter">Zoek op Genre</label>
-    <input type="checkbox" name="genreFilter" />
-    
-    <label for="jaarFilter">Zoek op Jaar</label>
-    <input type="checkbox" name="jaarFilter" />
-    
-    <label for="moeilijkheidFilter">Zoek op moeilijkheid</label>
-    <input type="checkbox" name="moeilijkheidFilter" />
+    <input type="checkbox" name="genreFilter" /><br>
 
-</form>
-<form method="get">
+    <label for="jaarFilter">Zoek op Jaar</label>
+    <input type="checkbox" name="jaarFilter" /><br>
+
+    <label for="moeilijkheidFilter">Zoek op moeilijkheid</label>
+    <input type="checkbox" name="moeilijkheidFilter" /><br>
+
     <input type="text" name="searchTitle" placeholder="Search" value="@cachedShit" />
     <input type="submit" value="Search" />
 </form>
-Val1: @Request.Form["nameFilter"]
-Val2: @Request.Form["genreFilter"]
-Val3: @Request.Form["jaarFilter"]
-Val4: @Request.Form["moeilijkheidFilter"] 
 
-<p>@endResult</p>
 <br>
 <div class="menu">
     <table class="table table-hover table-striped">
