@@ -8,6 +8,8 @@ namespace SheetMusic
     public class resolver
     {
 
+        private static string lastChecked = "";
+
         public static string getQueryString(string param)
         {
             switch (param)
@@ -20,9 +22,21 @@ namespace SheetMusic
                     return "SELECT * FROM Pieces WHERE Year LIKE LOWER(@0)";
                 case "difficulty":
                     return "SELECT * FROM Pieces WHERE Difficulty LIKE LOWER(@0)";
+                case "artist":
+                    return "SELECT * FROM Pieces WHERE Artist LIKE LOWER(@0)";
                 default:
                     return "SELECT * FROM Pieces WHERE PieceName LIKE LOWER(@0)";
             }
+        }
+
+        public static string GetCorrectCheckBoxShit()
+        {
+            return lastChecked;
+        }
+
+        public static void SetCorrectCheckBoxShit(string a1)
+        {
+            lastChecked = a1;
         }
 
 
