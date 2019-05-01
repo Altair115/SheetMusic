@@ -29,41 +29,49 @@
 
     if (IsPost)
     {
-    	//Get stuff from forms.
+        //Get stuff from forms.
+        var lastChecked = "";
         cachedShit = Request["searchTitle"];
         searchTerm = "%" + Request["searchTitle"] + "%";
 
         //Grab values of checkboxes
-        var a1 = Request.Form["nameFilter"];
+        var a1 = Request["nameFilter"];
         var a2 = Request["genreFilter"];
         var a3 = Request["jaarFilter"];
         var a4 = Request["moeilijkheidFilter"];
+        var a5 = Request["artistFilter"];
 
         if (a1 == "on" && isFound == false)
         {
             selectCommand = resolver.getQueryString("name");
+            resolver.SetCorrectCheckBoxShit("a1");
             isFound = true;
 
         }
         else if (a2 == "on" && isFound == false)
         {
             selectCommand = resolver.getQueryString("genre");
+            resolver.SetCorrectCheckBoxShit("a2");
             isFound = true;
         }
-        else if(a3 == "on" && isFound == false)
+        else if (a3 == "on" && isFound == false)
         {
             selectCommand = resolver.getQueryString("year");
+            resolver.SetCorrectCheckBoxShit("a3");
             isFound = true;
         }
-        else if(a4 == "on" && isFound == false)
+        else if (a4 == "on" && isFound == false)
         {
             selectCommand = resolver.getQueryString("difficulty");
+            resolver.SetCorrectCheckBoxShit("a4");
+            isFound = true;
+        }else if (a5 == "on" && isFound == false)
+        {
+            selectCommand = resolver.getQueryString("artist");
+            resolver.SetCorrectCheckBoxShit("a5");
         }
-        //searchTerm = Request.QueryString["searchTitle"];
 
     }
-
-    var endResult = selectCommand + searchTerm;
 
     var PiecesDB = db.Query(selectCommand, searchTerm);
 
@@ -78,22 +86,37 @@
 
 
 <form method="post">
+    <div id="checkbox-container">
+        <div>
+            <label for="nameFilter">Zoek op naam</label>
+            <input type="checkbox" name="nameFilter" class="mustSave"/><br>
+        </div>
+        
+        <div>
+            <label for="artistFilter">Zoek op Artiest</label>
+            <input type="checkbox" name="artistFilter" class="mustSave"/><br>
+        </div>
 
-    <label for="nameFilter">Zoek op naam</label>
-    <input type="checkbox" name="nameFilter" checked="checked" /><br>
+        <div>
+            <label for="genreFilter">Zoek op Genre</label>
+            <input type="checkbox" name="genreFilter" class="mustSave"/><br>
+        </div>
 
-    <label for="genreFilter">Zoek op Genre</label>
-    <input type="checkbox" name="genreFilter" /><br>
+        <div>
+            <label for="jaarFilter">Zoek op Jaar</label>
+            <input type="checkbox" name="jaarFilter" class="mustSave"/><br>
+        </div>
 
-    <label for="jaarFilter">Zoek op Jaar</label>
-    <input type="checkbox" name="jaarFilter" /><br>
-
-    <label for="moeilijkheidFilter">Zoek op moeilijkheid</label>
-    <input type="checkbox" name="moeilijkheidFilter" /><br>
-
+        <div>
+            <label for="moeilijkheidFilter">Zoek op moeilijkheid</label>
+            <input type="checkbox" name="moeilijkheidFilter" class="mustSave"/><br>
+        </div>
+    </div>
+    
     <input type="text" name="searchTitle" placeholder="Search" value="@cachedShit" />
     <input type="submit" value="Search" />
 </form>
+
 
 <br>
 <div class="menu">
@@ -129,3 +152,45 @@
 {
     Response.Redirect(Url.Action("Login", "Account"));
 }
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script>
+    //this piece of shit doesnt work.....
+    (function() {
+        // Var for local saving
+        var cbstate;
+  
+        // hook the load event of page
+        window.addEventListener('load', function() {
+            // Get the current state from localstorage
+            // State is stored as a JSON string
+            cbstate = JSON.parse(localStorage['CBState'] || '{}');
+  
+            // Loop through state array and restore checked 
+            for(var i in cbstate) {
+                var el = document.querySelector('input[name="' + i + '"]');
+                if (el) el.checked = true;
+            }
+  
+            // Retrieve all out checkboxes
+            var cb = document.getElementsByClassName('save-cb-state');
+  
+            for(var i = 0; i < cb.length; i++) {
+  
+                //hook click event and do check box shit
+                cb[i].addEventListener('click', function(evt) {
+
+                    if (this.checked) {
+                        cbstate[this.name] = true;
+                    }
+
+                    else if (cbstate[this.name]) {
+                        delete cbstate[this.name];
+                    }
+    
+                    localStorage.CBState = JSON.stringify(cbstate);
+                });
+            }
+        });
+    })();
+</script>
