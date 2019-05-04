@@ -3,7 +3,7 @@ using System.Security.Policy;
 using System.Web.Mvc.Html;
 using System.Web.Services.Protocols;
 
-namespace SheetMusic
+namespace SheetMusic.iAz_Magic
 {
     public class resolver
     {
@@ -29,15 +29,6 @@ namespace SheetMusic
             }
         }
 
-        public static string GetCorrectCheckBoxShit()
-        {
-            return lastChecked;
-        }
-
-        public static void SetCorrectCheckBoxShit(string a1)
-        {
-            lastChecked = a1;
-        }
 
 
     }

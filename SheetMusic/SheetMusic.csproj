@@ -183,6 +183,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="iAz Magic\MemCache.cs" />
     <Compile Include="iAz Magic\resolver.cs" />
     <Compile Include="Migrations\201903250940524_Piece1.cs" />
     <Compile Include="Migrations\201903250940524_Piece1.Designer.cs">
