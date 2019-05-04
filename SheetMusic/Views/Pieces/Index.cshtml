@@ -4,6 +4,7 @@
 @using System.Web.UI.WebControls
 @using WebMatrix.Data;
 @using Microsoft.AspNet.Identity;
+@using SheetMusic.iAz_Magic
 @using SheetMusic.Models
 
 @{
@@ -44,33 +45,34 @@
         if (a1 == "on" && isFound == false)
         {
             selectCommand = resolver.getQueryString("name");
-            resolver.SetCorrectCheckBoxShit("a1");
+            MemCache.forceSetMemVal("a1");
             isFound = true;
 
+        }
+        else if (a5 == "on" && isFound == false)
+        {
+            selectCommand = resolver.getQueryString("artist");
+            MemCache.forceSetMemVal("a5");
         }
         else if (a2 == "on" && isFound == false)
         {
             selectCommand = resolver.getQueryString("genre");
-            resolver.SetCorrectCheckBoxShit("a2");
+            MemCache.forceSetMemVal("a2");
             isFound = true;
         }
         else if (a3 == "on" && isFound == false)
         {
             selectCommand = resolver.getQueryString("year");
-            resolver.SetCorrectCheckBoxShit("a3");
+            MemCache.forceSetMemVal("a3");
             isFound = true;
         }
         else if (a4 == "on" && isFound == false)
         {
             selectCommand = resolver.getQueryString("difficulty");
-            resolver.SetCorrectCheckBoxShit("a4");
+            MemCache.forceSetMemVal("a4");
             isFound = true;
         }
-        else if (a5 == "on" && isFound == false)
-        {
-            selectCommand = resolver.getQueryString("artist");
-            resolver.SetCorrectCheckBoxShit("a5");
-        }
+
 
     }
 
@@ -107,27 +109,27 @@
     <div id="checkbox-container">
         <div>
             <label for="nameFilter">Search on Name</label>
-            <input type="checkbox" name="nameFilter" class="mustSave" /><br>
+            <input type="checkbox" name="nameFilter" class="mustSave" @MemCache.getCBoxVal("a1")/><br>
         </div>
 
         <div>
             <label for="artistFilter">Search on Artist</label>
-            <input type="checkbox" name="artistFilter" class="mustSave" /><br>
+            <input type="checkbox" name="artistFilter" class="mustSave" @MemCache.getCBoxVal("a5")/><br>
         </div>
 
         <div>
             <label for="genreFilter">Search on Genre</label>
-            <input type="checkbox" name="genreFilter" class="mustSave" /><br>
+            <input type="checkbox" name="genreFilter" class="mustSave" @MemCache.getCBoxVal("a2")/><br>
         </div>
 
         <div>
             <label for="jaarFilter">Search on Year</label>
-            <input type="checkbox" name="jaarFilter" class="mustSave" /><br>
+            <input type="checkbox" name="jaarFilter" class="mustSave" @MemCache.getCBoxVal("a3")/><br>
         </div>
 
         <div>
             <label for="moeilijkheidFilter">Search on Difficulty</label>
-            <input type="checkbox" name="moeilijkheidFilter" class="mustSave" /><br>
+            <input type="checkbox" name="moeilijkheidFilter" class="mustSave" @MemCache.getCBoxVal("a4")/><br>
         </div>
     </div>
 
