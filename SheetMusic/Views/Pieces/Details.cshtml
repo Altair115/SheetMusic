@@ -10,48 +10,48 @@
     <h4>Piece</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PieceName)
+        <dt class="panel panel-primary" style="text-align:center">
+            Piece
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.PieceName)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PieceSubName)
+        <dt class="panel panel-primary" style="text-align:center">
+            Artist
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.PieceSubName)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre)
+        <dt class="panel panel-primary" style="text-align:center">
+            Genre
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Genre)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Year)
+        <dt class="panel panel-primary" style="text-align:center">
+            Year
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Year)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Difficulty)
+        <dt class="panel panel-primary" style="text-align:center">
+            Diffuculty
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Difficulty)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
+        <dt class="panel panel-primary" style="text-align:center">
+            Description
         </dt>
 
         <dd>
@@ -61,6 +61,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn-sm btn-warning"})
+
 </p>
