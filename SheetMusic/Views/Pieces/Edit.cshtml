@@ -33,7 +33,7 @@
     <link rel=" stylesheet" type="text/css" href="~/Custom_Style/Custom Layout.css" />
 
     <style>
-        dl {
+        .Matrix {
             background-color: #357cb4;
             color: white;
             padding: 20px;
@@ -50,52 +50,230 @@
 </head>
 
 <h2>Edit - @toEdit.PieceName</h2>
+<h4>@toEdit.PieceSubName</h4>
+<hr />
 <h4>Edit the form to your wish and click submit to change.</h4>
 <hr />
 
-<div>
-    <form method="post" action="Index.cshtml">
-        <label for="musicName">Muziekstuk naam:</label>
-        <input type="text" value="@toEdit.PieceName" placeholder="Muziekstuk naam" name="musicName" /><br />
-
-        <label for="musicSubName">Muziekstuk subnaam:</label>
-        <input type="text" value="@toEdit.PieceSubName" placeholder="Muziek subnaam." name="musicSubName" /><br />
-
-        <label for="musicArtist">Muziekstuk componist:</label>
-        <input type="text" value="@toEdit.Artist" placeholder="Muziek componist." name="musicArtist" /><br />
-
-        <label for="musicYear">Muziekstuk jaar:</label>
-        <input type="number" value="@toEdit.Year" placeholder="Muziek jaar." name="musicYear" /><br />
-
-        <label for="musicDescription">Waar ligt het muziekstuk?</label>
-        <input type="text" value="@toEdit.Description" placeholder="Plek van stuk" name="musicDescription" /><br />
-
-        <label for="musicGenre">Muziek genre:</label>
-        <select  name="musicGenre">
-            <option value="Rock">Rock</option>
-            <option value="Caribbean">Caribbean</option>
-            <option value="Pop">Pop</option>
-            <option value="Hip Hop">Hip Hop</option>
-            <option value="Blues">Blues</option>
-            <option value="Country">Country</option>
-            <option value="R&B Soul">R&B Soul</option>
-            <option value="Jazz">Jazz</option>
-            <option value="Electronic">Electronic</option>
-            <option value="Anime">Anime</option>
-        </select><br />
-
-        <label for="musicDifficulty">Moeilijksheid graad</label>
-        <select name="musicDifficulty">
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Expert">Expert</option>
-            <option value="Expert Plus">Expert Plus</option>
-        </select><br />
-        <div style="text-align:center">
-            <input type="submit" value="Create" class="btn btn-success" />
+<form method="post" action="Index.cshtml" class="form-horizontal">
+    <div class="Matrix">
+        <div class="form-group">
+            <label for="musicName" class="control-label col-md-2">Name:</label>
+            <div class="col-md-10">
+                <input type="text" value="@toEdit.PieceName" placeholder="The 'Piece' name" name="musicName" class="form-control" />
+            </div>
         </div>
-    </form>
-</div>
+
+        <div class="form-group">
+            <label for="musicSubName" class="control-label col-md-2">Subtitle:</label>
+            <div class="col-md-10">
+                <input type="text" value="@toEdit.PieceSubName" placeholder="" name="musicSubName" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="musicArtist" class="control-label col-md-2">Artist / Composer:</label>
+            <div class="col-md-10">
+                <input type="text" value="@toEdit.Artist" placeholder="The Artist/Composer's Name" name="musicArtist" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="musicYear" class="control-label col-md-2">Year:</label>
+            <div class="col-md-10">
+                <input type="number" value="@toEdit.Year" placeholder="Year of Recording/Writing" name="musicYear" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="musicDescription" class="control-label col-md-2">Location:</label>
+            <div class="col-md-10">
+                <input type="text" value="@toEdit.Description" placeholder="Location of the Piece" name="musicDescription" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="musicGenre" class="control-label col-md-2">Genre:</label>
+            <div class="col-md-10">
+                <select name="musicGenre" class="form-control">
+                    #region CorrectInfoGetGenre
+                    @if (toEdit.Genre == "Rock")
+                    {
+                        <option value="Rock" selected="selected">Rock</option>
+                        <option value="Caribbean">Caribbean</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Country">Country</option>
+                        <option value="R&B Soul">R&B Soul</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Anime">Anime</option>
+                    }
+                    @if (toEdit.Genre == "Caribbean")
+                    {
+                        <option value="Rock">Rock</option>
+                        <option value="Caribbean" selected="selected">Caribbean</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Country">Country</option>
+                        <option value="R&B Soul">R&B Soul</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Anime">Anime</option>
+                    }
+                    @if (toEdit.Genre == "Pop")
+                    {
+                        <option value="Rock">Rock</option>
+                        <option value="Caribbean">Caribbean</option>
+                        <option value="Pop" selected="selected">Pop</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Country">Country</option>
+                        <option value="R&B Soul">R&B Soul</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Anime">Anime</option>
+                    }
+                    @if (toEdit.Genre == "Hip Hop")
+                    {
+                        <option value="Rock">Rock</option>
+                        <option value="Caribbean">Caribbean</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Hip Hop" selected="selected">Hip Hop</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Country">Country</option>
+                        <option value="R&B Soul">R&B Soul</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Anime">Anime</option>
+                    }
+                    @if (toEdit.Genre == "Blues")
+                    {
+                        <option value="Rock">Rock</option>
+                        <option value="Caribbean">Caribbean</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="Blues" selected="selected">Blues</option>
+                        <option value="Country">Country</option>
+                        <option value="R&B Soul">R&B Soul</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Anime">Anime</option>
+                    }
+                    @if (toEdit.Genre == "Country")
+                    {
+                        <option value="Rock">Rock</option>
+                        <option value="Caribbean">Caribbean</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Country" selected="selected">Country</option>
+                        <option value="R&B Soul">R&B Soul</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Anime">Anime</option>
+                    }
+                    @if (toEdit.Genre == "R&B Soul")
+                    {
+                        <option value="Rock">Rock</option>
+                        <option value="Caribbean">Caribbean</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Country">Country</option>
+                        <option value="R&B Soul" selected="selected">R&B Soul</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Anime">Anime</option>
+                    }
+                    @if (toEdit.Genre == "Jazz")
+                    {
+                        <option value="Rock">Rock</option>
+                        <option value="Caribbean">Caribbean</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Country">Country</option>
+                        <option value="R&B Soul">R&B Soul</option>
+                        <option value="Jazz" selected="selected">Jazz</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Anime">Anime</option>
+                    }
+                    @if (toEdit.Genre == "Electronic")
+                    {
+                        <option value="Rock">Rock</option>
+                        <option value="Caribbean">Caribbean</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Country">Country</option>
+                        <option value="R&B Soul">R&B Soul</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Electronic" selected="selected">Electronic</option>
+                        <option value="Anime">Anime</option>
+                    }
+                    @if (toEdit.Genre == "Anime")
+                    {
+                        <option value="Rock">Rock</option>
+                        <option value="Caribbean">Caribbean</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Country">Country</option>
+                        <option value="R&B Soul">R&B Soul</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Anime" selected="selected">Anime</option>
+                    }
+                    #endregion
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="musicDifficulty" class="control-label col-md-2">Difficulty:</label>
+            <div class="col-md-10">
+                <select name="musicDifficulty" class="form-control">
+                    @if (toEdit.Difficulty == "Beginner")
+                    {
+                        <option value="Beginner" selected="selected">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Expert">Expert</option>
+                        <option value="Expert Plus">Expert Plus</option>
+                    }
+                    @if (toEdit.Difficulty == "Intermediate")
+                    {
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate" selected="selected">Intermediate</option>
+                        <option value="Expert">Expert</option>
+                        <option value="Expert Plus">Expert Plus</option>
+                    }
+                    @if (toEdit.Difficulty == "Expert")
+                    {
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Expert" selected="selected">Expert</option>
+                        <option value="Expert Plus">Expert Plus</option>
+                    }
+                    @if (toEdit.Difficulty == "Expert Plus")
+                    {
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Expert">Expert</option>
+                        <option value="Expert Plus" selected="selected">Expert Plus</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div style="text-align:center">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" }) |
+        <input type="submit" value="Save" class="btn btn-success" />
+    </div>
+</form>
 
 @if (!Request.IsAuthenticated)
 {

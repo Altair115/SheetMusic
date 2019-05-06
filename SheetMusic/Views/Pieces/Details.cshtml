@@ -22,7 +22,7 @@
     <link rel=" stylesheet" type="text/css" href="~/Custom_Style/Custom Layout.css" />
 
     <style>
-        dl {
+        .Matrix {
             background-color: #357cb4;
             color: white;
             padding: 20px;
@@ -34,40 +34,76 @@
 @foreach (var record in detailed)
 {
     <h2>Details - @record.PieceName</h2>
+    <H4>@record.PieceSubName</H4>
 }
-<div class="menu">
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr class="row">
-                <th>Name:</th>
-                <th>Artist:</th>
-                <th>Genre:</th>
-                <th>Year:</th>
-                <th>Difficulty:</th>
-                <th>Plaats:</th>
-            </tr>
-        </thead>
-        @foreach (var record in detailed)
-        {
-        <tr class="row">
-            <td>
-                @record.PieceName
-                <p>@record.PieceSubName</p>
-            </td>
-            <td>@record.Artist</td>
-            <td>@record.Genre</td>
-            <td>@record.Year</td>
-            <td>@record.Difficulty</td>
-            <td>@record.Description</td>
-        </tr>
-        }
-    </table>
-</div>
+<hr />
 
-@* <p style="text-align:center"> *@
-@*     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" }) | *@
-@*     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) *@
-@* </p> *@
+@foreach (var record in detailed)
+{
+    <dl class="dl-horizontal Matrix">
+        <dt>
+            <label class="control-label col-md-2">Title:</label>
+        </dt>
+
+        <dd>
+            @record.PieceName
+        </dd>
+
+        <dt>
+            <label class="control-label col-md-2">Subtitle:</label>
+        </dt>
+
+        <dd>
+            @record.PieceSubName
+        </dd>
+
+        <dt>
+            <label class="control-label col-md-2">Artist:</label>
+        </dt>
+
+        <dd>
+            @record.Artist
+        </dd>
+
+        <dt>
+            <label class="control-label col-md-2">Genre:</label>
+        </dt>
+
+        <dd>
+            @record.Genre
+        </dd>
+
+        <dt>
+            <label class="control-label col-md-2">Year:</label>
+        </dt>
+
+        <dd>
+            @record.Year
+        </dd>
+
+        <dt>
+            <label class="control-label col-md-2">Difficulty:</label>
+        </dt>
+
+        <dd>
+            @record.Difficulty
+        </dd>
+
+        <dt>
+            <label class="control-label col-md-2">Description:</label>
+        </dt>
+
+        <dd>
+            @record.Description
+        </dd>
+
+    </dl>
+
+    <p style="text-align:center">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" }) |
+        <a class="btn btn-warning" href="~/Pieces/Edit?id=@record.Id">Edit</a>
+    </p>
+}
 
 @if (!Request.IsAuthenticated)
 {
