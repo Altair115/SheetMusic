@@ -1,4 +1,4 @@
-﻿@model SheetMusic.Models.Piece
+﻿@model IEnumerable<SheetMusic.Models.Piece>
 @using System.EnterpriseServices
 @using System.ServiceModel.Syndication
 @using System.Web.UI.WebControls
@@ -8,6 +8,14 @@
 @using SheetMusic.Models
 @{
     ViewBag.Title = "Details";
+
+    var _id = Request.QueryString["id"];
+
+    string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Sheetz.mdf;Integrated Security=True";
+    string provider = "System.Data.SqlClient";
+    Database db = Database.OpenConnectionString(connectionString, provider);
+
+    var detailed = db.Query("SELECT * FROM Pieces WHERE Id = @0", _id);
 }
 
 <head>
@@ -23,74 +31,43 @@
     </style>
 </head>
 
-<h2>Details - @Html.DisplayFor(model => model.PieceName)</h2>
-
-<div>
-    <h4>@Html.DisplayFor(model => model.PieceSubName)</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            <label class="control-label col-md-2">Title:</label>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PieceName)
-        </dd>
-
-        <dt>
-            <label class="control-label col-md-2">Subtitle:</label>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PieceSubName)
-        </dd>
-
-        <dt>
-            <label class="control-label col-md-2">Artist:</label>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Artist)
-        </dd>
-
-        <dt>
-            <label class="control-label col-md-2">Genre:</label>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Genre)
-        </dd>
-
-        <dt>
-            <label class="control-label col-md-2">Year:</label>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Year)
-        </dd>
-
-        <dt>
-            <label class="control-label col-md-2">Difficulty:</label>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Difficulty)
-        </dd>
-
-        <dt>
-            <label class="control-label col-md-2">Description:</label>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
+@foreach (var record in detailed)
+{
+    <h2>Details - @record.PieceName</h2>
+}
+<div class="menu">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr class="row">
+                <th>Name:</th>
+                <th>Artist:</th>
+                <th>Genre:</th>
+                <th>Year:</th>
+                <th>Difficulty:</th>
+                <th>Plaats:</th>
+            </tr>
+        </thead>
+        @foreach (var record in detailed)
+        {
+        <tr class="row">
+            <td>
+                @record.PieceName
+                <p>@record.PieceSubName</p>
+            </td>
+            <td>@record.Artist</td>
+            <td>@record.Genre</td>
+            <td>@record.Year</td>
+            <td>@record.Difficulty</td>
+            <td>@record.Description</td>
+        </tr>
+        }
+    </table>
 </div>
-<p style="text-align:center">
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" }) |
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
-</p>
+
+@* <p style="text-align:center"> *@
+@*     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" }) | *@
+@*     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) *@
+@* </p> *@
 
 @if (!Request.IsAuthenticated)
 {

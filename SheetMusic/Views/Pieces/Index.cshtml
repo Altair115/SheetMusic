@@ -23,10 +23,6 @@
 
     var cachedShit = "";
 
-    bool isFound = false;
-
-
-
 
 
     if (IsPost)
@@ -43,35 +39,31 @@
         var a4 = Request["moeilijkheidFilter"];
         var a5 = Request["artistFilter"];
 
-        if (a1 == "on" && isFound == false)
+        if (a1 == "on")
         {
             selectCommand = resolver.getQueryString("name", _key);
             MemCache.forceSetMemVal("a1");
-            isFound = true;
 
         }
-        else if (a5 == "on" && isFound == false)
+        else if (a5 == "on")
         {
             selectCommand = resolver.getQueryString("artist", _key);
             MemCache.forceSetMemVal("a5");
         }
-        else if (a2 == "on" && isFound == false)
+        else if (a2 == "on")
         {
             selectCommand = resolver.getQueryString("genre", _key);
             MemCache.forceSetMemVal("a2");
-            isFound = true;
         }
-        else if (a3 == "on" && isFound == false)
+        else if (a3 == "on")
         {
             selectCommand = resolver.getQueryString("year", _key);
             MemCache.forceSetMemVal("a3");
-            isFound = true;
         }
-        else if (a4 == "on" && isFound == false)
+        else if (a4 == "on")
         {
             selectCommand = resolver.getQueryString("difficulty", _key);
             MemCache.forceSetMemVal("a4");
-            isFound = true;
         }
 
 
@@ -173,8 +165,9 @@
                 <td>@record.Year</td>
                 <td>@record.Difficulty</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = record.Id }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Details", "Details", new { id = record.Id }, new { @class = "btn btn-info" })
+                    @* @Html.ActionLink("Edit", "Edit", new { id = record.Id }, new { @class = "btn btn-info" }) *@
+                    <a class="btn btn-info" href="~/Pieces/Details?id=@record.Id">Details</a>
+                    <a class="btn btn-info" href="~/Pieces/Edit?id=@record.Id">Edit</a>
                     @Html.ActionLink("Delete", "Delete", new { id = record.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>

@@ -25,18 +25,9 @@ namespace SheetMusic.Controllers
         }
 
         // GET: Pieces/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Piece piece = db.Pieces.Find(id);
-            if (piece == null)
-            {
-                return HttpNotFound();
-            }
-            return View(piece);
+            return View();
         }
 
         // GET: Pieces/Create
@@ -47,33 +38,11 @@ namespace SheetMusic.Controllers
 
 
         // GET: Pieces/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Piece piece = db.Pieces.Find(id);
-            if (piece == null)
-            {
-                return HttpNotFound();
-            }
-            return View(piece);
+            return View();
         }
 
-        // POST: Pieces/Edit/
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PieceName,PieceSubName,Artist,Genre,Year,Difficulty,Description")] Piece piece)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(piece).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(piece);
-        }
 
         // GET: Pieces/Delete/
         public ActionResult Delete(int? id)
