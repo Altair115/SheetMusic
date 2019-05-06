@@ -21,38 +21,7 @@ namespace SheetMusic.Controllers
         // GET: Pieces
         public ActionResult Index(string searchParams, string sortOrder)
         {
-            ViewBag.GenreSearchParm = String.IsNullOrEmpty(searchParams) ? "search_Genre" : "";
-            ViewBag.DifficultySearchParm = String.IsNullOrEmpty(searchParams) ? "search_Difficulty" : "";
-            ViewBag.YearSearchParm = String.IsNullOrEmpty(searchParams) ? "search_Year" : "";
-
-            string currentUserId = User.Identity.GetUserId();
-            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
-
-            if (!String.IsNullOrEmpty(searchParams))
-            {
-                var d = db.Pieces.ToList().Where(x => x.User == currentUser);
-                switch (sortOrder)
-                {
-                    //Check URL for search type
-                    case "search_Genre":
-                        d = d.Where(m => m.Genre.ToLower().Contains(searchParams.ToLower()));
-                        break;
-
-                    case "search_Difficulty":
-                        d = d.Where(m => m.Difficulty.ToLower().Contains(searchParams.ToLower()));
-                        break;
-                    case "search_Year":
-                        d = d.Where(m => m.Year.ToString().ToLower().Contains(searchParams.ToLower()));
-                        break;
-                    //Default to name if none found.
-                    default:
-                        d = d.Where(m => m.PieceName.ToLower().Contains(searchParams.ToLower()));
-                        break;
-                }
-
-                return View(d.ToList());
-            }
-            return View(db.Pieces.ToList().Where(x => x.User == currentUser));
+            return View();
         }
 
         // GET: Pieces/Details/5
@@ -73,27 +42,9 @@ namespace SheetMusic.Controllers
         // GET: Pieces/Create
         public ActionResult Create()
         {
-            Piece _piece = new Piece();
-            return View(_piece);
+            return View();
         }
 
-        // POST: Pieces/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PieceName,PieceSubName,Artist,Genre,Year,Difficulty,Description")] Piece piece)
-        {
-            if (ModelState.IsValid)
-            {
-                string currentUserId = User.Identity.GetUserId();
-                ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
-                piece.User = currentUser;
-                db.Pieces.Add(piece);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(piece);
-        }
 
         // GET: Pieces/Edit/5
         public ActionResult Edit(int? id)
