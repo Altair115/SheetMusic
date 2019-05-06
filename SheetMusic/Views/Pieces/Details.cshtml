@@ -1,5 +1,11 @@
 ﻿@model SheetMusic.Models.Piece
-
+@using System.EnterpriseServices
+@using System.ServiceModel.Syndication
+@using System.Web.UI.WebControls
+@using WebMatrix.Data;
+@using Microsoft.AspNet.Identity;
+@using SheetMusic.iAz_Magic
+@using SheetMusic.Models
 @{
     ViewBag.Title = "Details";
 }
@@ -11,8 +17,8 @@
         dl {
             background-color: #357cb4;
             color: white;
-            padding:20px;
-            border-radius:25px;
+            padding: 20px;
+            border-radius: 25px;
         }
     </style>
 </head>
@@ -82,7 +88,7 @@
     </dl>
 </div>
 <p style="text-align:center">
-    @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" }) |
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
 </p>
 

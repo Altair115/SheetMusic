@@ -1,4 +1,6 @@
 ﻿@using System.Web.UI.WebControls
+@using Microsoft.AspNet.Identity
+@using SheetMusic.iAz_Magic
 @model SheetMusic.Models.Piece
 @using WebMatrix.Data;
 
@@ -9,30 +11,22 @@
     string provider = "System.Data.SqlClient";
     Database db = Database.OpenConnectionString(connectionString, provider);
 
+    var _key = User.Identity.GetUserId();
 
-    //Items for dropdown list
-    var ListItems = new List<ListItem>
-{
-new ListItem{Text ="Rock", Value ="Rock"},
-new ListItem{Text ="Caribbean", Value="Caribbean"},
-new ListItem{Text="Pop", Value="Pop"},
-new ListItem{Text="Hip Hop", Value="Hip Hop"},
-new ListItem{Text="Blues", Value="Blues"},
-new ListItem{Text="Country", Value="Country"},
-new ListItem{Text="R&B Soul", Value="R&BSoul"},
-new ListItem{Text="Jazz", Value="Jazz"},
-new ListItem{Text="Electronic", Value="Electronic"},
-new ListItem{Text="Anime", Value="Anime"}
-};
 
-    //List for Difficulties
-    var difficulties = new List<ListItem>
-{
-new ListItem {Text = "Beginner", Value = "Beginner"},
-new ListItem {Text = "Intermediate", Value = "Intermediate"},
-new ListItem {Text = "Expert", Value = "Expert"},
-new ListItem {Text = "Expert Plus", Value = "Expert Plus"}
-};
+
+    if (IsPost)
+    {
+        var musicName = Request["musicName"];
+        var musicSubName = Request["musicSubName"];
+        var musicArtist = Request["musicArtist"];
+        var musicYear = Request["musicYear"].ToString();
+        var musicDescription = Request["musicDescription"];
+        var musicGenre = Request["musicGenre"];
+        var musicDifficulty = Request["musicDifficulty"];
+
+        Database_Management.yoinkintoDatabase(musicName, musicSubName, musicGenre, musicArtist, musicYear, musicDescription, musicDifficulty, _key);
+    }
 }
 
 <head>
@@ -59,77 +53,54 @@ new ListItem {Text = "Expert Plus", Value = "Expert Plus"}
 <h4>Fill the Form to add a new Piece</h4>
 <hr />
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div>
+    <form method="post" action="Index.cshtml">
+        <label for="musicName">Muziekstuk naam:</label>
+        <input type="text" placeholder="Muziekstuk naam" name="musicName" /><br />
 
-    <dl>
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <label class="control-label col-md-2">Title:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PieceName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PieceName, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        <label for="musicSubName">Muziekstuk subnaam:</label>
+        <input type="text" placeholder="Muziek subnaam." name="musicSubName" /><br />
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Subtitle:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PieceSubName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PieceSubName, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        <label for="musicArtist">Muziekstuk componist:</label>
+        <input type="text" placeholder="Muziek componist." name="musicArtist" /><br />
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Artist:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Artist, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Artist, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        <label for="musicYear">Muziekstuk jaar:</label>
+        <input type="number" placeholder="Muziek jaar." name="musicYear" /><br />
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Genre:</label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.Genre, new SelectList(ListItems, "Value", "Text"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" })
+        <label for="musicDescription">Waar ligt het muziekstuk?</label>
+        <input type="text" placeholder="Plek van stuk" name="musicDescription" /><br />
 
-                </div>
-            </div>
+        <label for="musicGenre">Muziek genre:</label>
+        <select name="musicGenre">
+            <option value="Rock">Rock</option>
+            <option value="Caribbean">Caribbean</option>
+            <option value="Pop">Pop</option>
+            <option value="Hip Hop">Hip Hop</option>
+            <option value="Blues">Blues</option>
+            <option value="Country">Country</option>
+            <option value="R&B Soul">R&B Soul</option>
+            <option value="Jazz">Jazz</option>
+            <option value="Electronic">Electronic</option>
+            <option value="Anime">Anime</option>
+        </select><br />
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Year:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2">Difficulty:</label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.Difficulty, new SelectList(difficulties, "Value", "Text"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Difficulty, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2">Description:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        <label for="musicDifficulty">Moeilijksheid graad</label>
+        <select name="musicDifficulty">
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Expert">Expert</option>
+            <option value="Expert Plus">Expert Plus</option>
+        </select><br />
+        <div style="text-align:center">
+            <input type="submit" value="Create" class="btn btn-success" />
         </div>
-    </dl>
-}
-
-<div style="text-align:center">
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" }) |
-    <input type="submit" value="Create" class="btn btn-success" />
+    </form>
 </div>
+
+@* <div style="text-align:center"> *@
+@*     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" }) | *@
+@*      *@
+@* </div> *@
 
 @if (!Request.IsAuthenticated)
 {
