@@ -50,9 +50,10 @@ namespace SheetMusic.Controllers
                         break;
                 }
 
-                return View(d.ToList());
+                return View(db.Pieces.SqlQuery("Select * from Pieces where User_Id=@0", currentUserId).ToList());
             }
-            return View(db.Pieces.ToList().Where(x => x.User == currentUser));
+            //db.Pieces.ToList().Where(x => x.User == currentUser)
+            return View();
         }
 
         // GET: Pieces/Details/5
@@ -102,7 +103,7 @@ namespace SheetMusic.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Piece piece = db.Pieces.Find(id);
+            Piece piece = db.Pieces.SqlQuery("Select * from Pieces where Id=@0", id).FirstOrDefault<Piece>();
             if (piece == null)
             {
                 return HttpNotFound();
@@ -131,7 +132,7 @@ namespace SheetMusic.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Piece piece = db.Pieces.Find(id);
+            Piece piece = db.Pieces.SqlQuery("Select * from Pieces where Id=@0", id).FirstOrDefault<Piece>();
             if (piece == null)
             {
                 return HttpNotFound();
