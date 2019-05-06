@@ -16,15 +16,16 @@
     string provider = "System.Data.SqlClient";
     Database db = Database.OpenConnectionString(connectionString, provider);
 
+    var _key = User.Identity.GetUserId();
     //string selectCommand = "SELECT * FROM Pieces";
-    string selectCommand = "SELECT * FROM Pieces";
+    string selectCommand = String.Format("SELECT * FROM Pieces WHERE User_Id = '{0}'",_key);
     var searchTerm = "";
 
     var cachedShit = "";
 
     bool isFound = false;
 
-    var _key = User.Identity.GetUserId();
+
 
 
 
@@ -44,37 +45,38 @@
 
         if (a1 == "on" && isFound == false)
         {
-            selectCommand = resolver.getQueryString("name");
+            selectCommand = resolver.getQueryString("name", _key);
             MemCache.forceSetMemVal("a1");
             isFound = true;
 
         }
         else if (a5 == "on" && isFound == false)
         {
-            selectCommand = resolver.getQueryString("artist");
+            selectCommand = resolver.getQueryString("artist", _key);
             MemCache.forceSetMemVal("a5");
         }
         else if (a2 == "on" && isFound == false)
         {
-            selectCommand = resolver.getQueryString("genre");
+            selectCommand = resolver.getQueryString("genre", _key);
             MemCache.forceSetMemVal("a2");
             isFound = true;
         }
         else if (a3 == "on" && isFound == false)
         {
-            selectCommand = resolver.getQueryString("year");
+            selectCommand = resolver.getQueryString("year", _key);
             MemCache.forceSetMemVal("a3");
             isFound = true;
         }
         else if (a4 == "on" && isFound == false)
         {
-            selectCommand = resolver.getQueryString("difficulty");
+            selectCommand = resolver.getQueryString("difficulty", _key);
             MemCache.forceSetMemVal("a4");
             isFound = true;
         }
 
 
     }
+
 
     var PiecesDB = db.Query(selectCommand, searchTerm);
 
