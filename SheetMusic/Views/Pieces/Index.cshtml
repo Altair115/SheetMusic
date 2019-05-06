@@ -103,7 +103,7 @@
     @Html.ActionLink("Add New Piece", "Create", null, new { @class = "btn btn-primary" })
 </p>
 
-<br />
+<hr />
 
 <form method="post">
     <div id="checkbox-container">
@@ -132,6 +132,8 @@
             <input type="checkbox" name="moeilijkheidFilter" class="mustSave" @MemCache.getCBoxVal("a4")/><br>
         </div>
     </div>
+
+    <hr />
 
     <div class="input-group">
         <input type="text" class="form-control" name="searchTitle" placeholder="Search" value="@cachedShit">

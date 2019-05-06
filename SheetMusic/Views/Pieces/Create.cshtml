@@ -12,106 +12,123 @@
 
     //Items for dropdown list
     var ListItems = new List<ListItem>
-    {
-    new ListItem{Text ="Rock", Value ="Rock"},
-    new ListItem{Text ="Caribbean", Value="Caribbean"},
-    new ListItem{Text="Pop", Value="Pop"},
-    new ListItem{Text="Hip Hop", Value="Hip Hop"},
-    new ListItem{Text="Blues", Value="Blues"},
-    new ListItem{Text="Country", Value="Country"},
-    new ListItem{Text="R&B Soul", Value="R&BSoul"},
-    new ListItem{Text="Jazz", Value="Jazz"},
-    new ListItem{Text="Electronic", Value="Electronic"},
-    new ListItem{Text="Anime", Value="Anime"}
-    };
+{
+new ListItem{Text ="Rock", Value ="Rock"},
+new ListItem{Text ="Caribbean", Value="Caribbean"},
+new ListItem{Text="Pop", Value="Pop"},
+new ListItem{Text="Hip Hop", Value="Hip Hop"},
+new ListItem{Text="Blues", Value="Blues"},
+new ListItem{Text="Country", Value="Country"},
+new ListItem{Text="R&B Soul", Value="R&BSoul"},
+new ListItem{Text="Jazz", Value="Jazz"},
+new ListItem{Text="Electronic", Value="Electronic"},
+new ListItem{Text="Anime", Value="Anime"}
+};
 
     //List for Difficulties
     var difficulties = new List<ListItem>
-    {
-    new ListItem {Text = "Beginner", Value = "Beginner"},
-    new ListItem {Text = "Intermediate", Value = "Intermediate"},
-    new ListItem {Text = "Expert", Value = "Expert"},
-    new ListItem {Text = "Expert Plus", Value = "Expert Plus"}
-    };
+{
+new ListItem {Text = "Beginner", Value = "Beginner"},
+new ListItem {Text = "Intermediate", Value = "Intermediate"},
+new ListItem {Text = "Expert", Value = "Expert"},
+new ListItem {Text = "Expert Plus", Value = "Expert Plus"}
+};
 }
 
-<h2>Add - Piece</h2>
+<head>
+    <link rel=" stylesheet" type="text/css" href="~/Custom_Style/Custom Layout.css" />
 
+    <style>
+        dl {
+            background-color: #357cb4;
+            color: white;
+            padding: 20px;
+            padding-top: 28px;
+            border-radius: 25px;
+        }
+
+        input,
+        select,
+        textarea {
+            max-width: 350px;
+        }
+    </style>
+</head>
+
+<h2>Add - Piece</h2>
+<h4>Fill the Form to add a new Piece</h4>
+<hr />
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <label class="control-label col-md-2">Title:</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PieceName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PieceName, "", new { @class = "text-danger" })
+    <dl>
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">Title:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PieceName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PieceName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Subtitle:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PieceSubName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PieceSubName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Artist:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Artist, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Artist, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Genre:</label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Genre, new SelectList(ListItems, "Value", "Text"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Year:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Difficulty:</label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Difficulty, new SelectList(difficulties, "Value", "Text"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Difficulty, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Description:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Subtitle:</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PieceSubName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PieceSubName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Artist:</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Artist, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Artist, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Genre:</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Genre, new SelectList(ListItems, "Value", "Text"))
-                @Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" })
-
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Year:</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Difficulty:</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Difficulty, new SelectList(difficulties, "Value", "Text"))
-                @Html.ValidationMessageFor(model => model.Difficulty, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Description:</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+    </dl>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div style="text-align:center">
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" }) |
+    <input type="submit" value="Create" class="btn btn-success" />
 </div>
 
 @if (!Request.IsAuthenticated)

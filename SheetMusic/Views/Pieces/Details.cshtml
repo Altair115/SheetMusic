@@ -4,6 +4,19 @@
     ViewBag.Title = "Details";
 }
 
+<head>
+    <link rel=" stylesheet" type="text/css" href="~/Custom_Style/Custom Layout.css" />
+
+    <style>
+        dl {
+            background-color: #357cb4;
+            color: white;
+            padding:20px;
+            border-radius:25px;
+        }
+    </style>
+</head>
+
 <h2>Details - @Html.DisplayFor(model => model.PieceName)</h2>
 
 <div>
@@ -68,9 +81,9 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+<p style="text-align:center">
+    @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
 </p>
 
 @if (!Request.IsAuthenticated)
